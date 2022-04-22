@@ -1,0 +1,21 @@
+Places to look into:
+
+node/src/service.rs:
+    - adding InherentDataProvider for karaoke in StartAuraParams
+    - some usage of ProposerFactory (tutorial says it might be important)
+
+pallets/karaoke/src/lib.rs:
+    - in pallet::call - call that adds song line to block
+    - in pallet::inherent - provide and verify inherent (ProvideInherent)
+    - implement InherentDataProvider
+    - INHERENT_IDENTIFIER
+
+runtime/src/lib.rs:
+    - pallet Config
+    - add pallet in construct_runtime
+
+
+Not known:
+ * potentialy: place to implement wrapper for Proposer and ProposerFactory (probably the same place)
+ * what changed
+ * how to store and access lyrics
