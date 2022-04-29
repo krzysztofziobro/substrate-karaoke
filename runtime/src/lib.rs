@@ -268,7 +268,6 @@ impl pallet_sudo::Config for Runtime {
 
 /// Configure the pallet-karaoke in pallets/karaoke.
 impl pallet_karaoke::Config for Runtime {
-	type Event = Event;
 }
 
 // Create the runtime by composing the FRAME pallets that were previously configured.
@@ -287,7 +286,7 @@ construct_runtime!(
 		TransactionPayment: pallet_transaction_payment,
 		Sudo: pallet_sudo,
 		// Include the custom logic from the pallet-karaoke in the runtime.
-		karaokeModule: pallet_karaoke,
+		Karaoke: pallet_karaoke,
 	}
 );
 
@@ -330,7 +329,7 @@ mod benches {
 		[frame_system, SystemBench::<Runtime>]
 		[pallet_balances, Balances]
 		[pallet_timestamp, Timestamp]
-		[pallet_karaoke, karaokeModule]
+		[pallet_karaoke, Karaoke]
 	);
 }
 

@@ -19,6 +19,7 @@ name = "node-template"
 [dependencies]
 clap = { version = "3.0", features = ["derive"] }
 
+
 sc-cli = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.18", features = ["wasmtime"] }
 sp-core = { version = "6.0.0", git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.18" }
 sc-executor = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.18", features = ["wasmtime"]  }
@@ -54,6 +55,7 @@ frame-benchmarking-cli = { version = "4.0.0-dev", git = "https://github.com/pari
 
 # Local Dependencies
 node-template-runtime = { version = "4.0.0-dev", path = "../runtime" }
+sp-karaoke = {version = "4.0.0-dev", path = "../pallets/sp_karaoke"}
 
 [build-dependencies]
 substrate-build-script-utils = { version = "3.0.0", git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.18" }

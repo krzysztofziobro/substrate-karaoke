@@ -1,0 +1,32 @@
+[package]
+name = "sp-karaoke"
+version = "4.0.0-dev"
+description = "Pallet karaoke structs/trait implementations."
+edition = "2021"
+license = "Unlicense"
+publish = false
+repository = "https://github.com/krzysztof-ziobro/substrate-karaoke/"
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[dependencies]
+codec = { package = "parity-scale-codec", version = "3.0.0", default-features = false, features = [
+	"derive",
+] }
+thiserror = {version = "1.0.30", optional = true}
+async-trait = {version = "0.1.50", optional = true}
+log = { version = "0.4.8", optional = true}
+sp-inherents = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.18" }
+sp-runtime = { default-features = false, version = "6.0.0", git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.18" }
+
+[features]
+default = ["std"]
+std = [
+    "sp-runtime/std",
+	"codec/std",
+    "sp-inherents/std",
+    "async-trait",
+    "thiserror",
+    "log",
+]

@@ -2,7 +2,9 @@
 members = [
     "node",
     "pallets/karaoke",
+    "pallets/sp_karaoke",
     "runtime",
 ]
 [profile.release]
 panic = "unwind"
+

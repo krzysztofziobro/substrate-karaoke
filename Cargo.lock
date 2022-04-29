@@ -3620,6 +3620,7 @@ dependencies = [
  "sp-consensus-aura",
  "sp-core",
  "sp-finality-grandpa",
+ "sp-karaoke",
  "sp-runtime",
  "sp-timestamp",
  "substrate-build-script-utils",
@@ -3926,14 +3927,13 @@ dependencies = [
 name = "pallet-karaoke"
 version = "4.0.0-dev"
 dependencies = [
- "frame-benchmarking",
  "frame-support",
  "frame-system",
+ "frame-try-runtime",
  "parity-scale-codec",
  "scale-info",
- "sp-core",
- "sp-io",
- "sp-runtime",
+ "sp-inherents",
+ "sp-karaoke",
 ]
 
 [[package]]
@@ -6516,6 +6516,18 @@ dependencies = [
  "sp-wasm-interface",
  "tracing",
  "tracing-core",
+]
+
+[[package]]
+name = "sp-karaoke"
+version = "4.0.0-dev"
+dependencies = [
+ "async-trait",
+ "log",
+ "parity-scale-codec",
+ "sp-inherents",
+ "sp-runtime",
+ "thiserror",
 ]
 
 [[package]]
