@@ -14,6 +14,10 @@ pub mod pallet {
     use sp_karaoke::KaraokeError;
     use sp_karaoke::INHERENT_IDENTIFIER;
     use sp_karaoke::InherentType;
+    use sp_karaoke::SONG_LEN;
+
+    extern crate alloc;
+    use alloc::vec::*;
 
     /// Configure the pallet by specifying the parameters and types on which it depends.
     #[pallet::config]
@@ -30,11 +34,12 @@ pub mod pallet {
 
     #[pallet::call]
     impl<T: Config> Pallet<T> {
-        // TODO: set weight that makes sense
-        #[pallet::weight(10_000)]
-        pub fn set(origin: OriginFor<T>, song_line : u32) -> DispatchResult {
+        #[pallet::weight((10_000, DispatchClass::Mandatory))]
+        pub fn update_karaoke_inherent(origin: OriginFor<T>, _song_line : [u8; 100]) -> DispatchResult {
             ensure_none(origin)?;
-            Line::<T>::put(song_line);
+            let mut ind = Line::<T>::get();
+            ind = (ind + 1) % SONG_LEN;
+            Line::<T>::put(ind);
             Ok(())
         }
     }
@@ -46,15 +51,22 @@ pub mod pallet {
         const INHERENT_IDENTIFIER: InherentIdentifier = INHERENT_IDENTIFIER;
 
         fn create_inherent(data: &InherentData) -> Option<Self::Call> {
-            let data = data.get_data::<InherentType>(&INHERENT_IDENTIFIER)
+            let data = data.get_data::<Vec<InherentType>>(&INHERENT_IDENTIFIER)
                 .expect("Song line not correctly encoded")
                 .expect("Song line data must be provided");
 
-            Some(Call::set { song_line : data.0 })
+            let line_num = Line::<T>::get() as usize;
+
+            let mut line_data : [u8; 100] = [0; 100];
+            for i in 0..data[line_num].len() {
+                line_data[i] = data[line_num][i];
+            }
+
+            Some(Call::update_karaoke_inherent { song_line : line_data })
         }
 
         fn is_inherent(call : &Self::Call) -> bool {
-            matches!(call, Call::set{ .. })
+            matches!(call, Call::update_karaoke_inherent{ .. })
         }
     }
 }
