@@ -16,7 +16,6 @@ runtime/src/lib.rs:
 
 
 Not known:
- * potentialy: place to implement wrapper for Proposer and ProposerFactory (probably the same place)
- * what changed
  * how to store and access lyrics
  * how to set correct weights and does it really matter
+ * variable length inherents

@@ -119,7 +119,7 @@ pub fn new_partial(
 			client: client.clone(),
 			create_inherent_data_providers: move |_, ()| async move {
 				let timestamp = sp_timestamp::InherentDataProvider::from_system_time();
-                let karaoke = sp_karaoke::InherentDataProvider::new(sp_karaoke::SongLine(0xffffffff));
+                let karaoke = sp_karaoke::InherentDataProvider::new();
 
 				let slot =
 					sp_consensus_aura::inherents::InherentDataProvider::from_timestamp_and_slot_duration(
@@ -270,7 +270,7 @@ pub fn new_full(mut config: Configuration) -> Result<TaskManager, ServiceError> 
 				proposer_factory,
 				create_inherent_data_providers: move |_, ()| async move {
 					let timestamp = sp_timestamp::InherentDataProvider::from_system_time();
-                    let karaoke = sp_karaoke::InherentDataProvider::new(sp_karaoke::SongLine(0xffffffff));
+                    let karaoke = sp_karaoke::InherentDataProvider::new();
 
 					let slot =
 						sp_consensus_aura::inherents::InherentDataProvider::from_timestamp_and_slot_duration(

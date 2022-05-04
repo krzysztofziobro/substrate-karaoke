@@ -268,6 +268,7 @@ impl pallet_sudo::Config for Runtime {
 
 /// Configure the pallet-karaoke in pallets/karaoke.
 impl pallet_karaoke::Config for Runtime {
+    type Event = Event;
 }
 
 // Create the runtime by composing the FRAME pallets that were previously configured.
