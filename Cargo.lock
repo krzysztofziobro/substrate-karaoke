@@ -3598,6 +3598,7 @@ dependencies = [
  "frame-benchmarking-cli",
  "jsonrpc-core",
  "node-template-runtime",
+ "pallet-karaoke",
  "pallet-transaction-payment-rpc",
  "sc-basic-authorship",
  "sc-cli",
@@ -3620,7 +3621,6 @@ dependencies = [
  "sp-consensus-aura",
  "sp-core",
  "sp-finality-grandpa",
- "sp-karaoke",
  "sp-runtime",
  "sp-timestamp",
  "substrate-build-script-utils",
@@ -3927,13 +3927,16 @@ dependencies = [
 name = "pallet-karaoke"
 version = "4.0.0-dev"
 dependencies = [
+ "async-trait",
  "frame-support",
  "frame-system",
  "frame-try-runtime",
+ "log",
  "parity-scale-codec",
  "scale-info",
  "sp-inherents",
- "sp-karaoke",
+ "sp-runtime",
+ "thiserror",
 ]
 
 [[package]]
@@ -6516,18 +6519,6 @@ dependencies = [
  "sp-wasm-interface",
  "tracing",
  "tracing-core",
-]
-
-[[package]]
-name = "sp-karaoke"
-version = "4.0.0-dev"
-dependencies = [
- "async-trait",
- "log",
- "parity-scale-codec",
- "sp-inherents",
- "sp-runtime",
- "thiserror",
 ]
 
 [[package]]

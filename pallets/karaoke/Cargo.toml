@@ -18,7 +18,10 @@ frame-support = { version = "4.0.0-dev", default-features = false, git = "https:
 frame-system = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.18" }
 frame-try-runtime = { version = "0.10.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.18" }
 sp-inherents = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.18"}
-sp-karaoke = {version = "4.0.0-dev", path = '../sp_karaoke', default-features = false}
+sp-runtime = { default-features = false, version = "6.0.0", git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.18" }
+thiserror = {version = "1.0.30", optional = true}
+async-trait = {version = "0.1.50", optional = true}
+log = { version = "0.4.8", optional = true}
 
 [features]
 default = ["std"]
@@ -28,5 +31,8 @@ std = [
 	"frame-support/std",
 	"frame-system/std",
 	"sp-inherents/std",
-    "sp-karaoke/std",
+    "sp-runtime/std",
+    "async-trait",
+    "thiserror",
+    "log",
 ]
