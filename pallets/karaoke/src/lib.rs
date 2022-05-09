@@ -11,12 +11,12 @@ pub use pallet::*;
 use codec::{Decode, Encode};
 use sp_inherents::{InherentData, InherentIdentifier,   IsFatalError};
 use alloc::vec::*;
+use frame_support::log::info;
 
 pub const INHERENT_IDENTIFIER : InherentIdentifier = *b"karaoke0";
 pub type InherentType = Vec<u8>;
 
 pub const SONG_LEN : u32 = 19;
-//const SONG : [&'static str; SONG_LEN as usize] = ["a", "b", "c", "d"];
 const SONG : [&'static str; SONG_LEN as usize] =
 ["If you like to gamble, I tell you I'm your man",
 "You win some, lose some, all the same to me",
@@ -104,22 +104,12 @@ pub mod pallet {
     #[pallet::generate_store(pub(super) trait Store)]
     pub struct Pallet<T>(_);
 
-    #[pallet::storage]
-    #[pallet::getter(fn line)]
-    // Line counter that provides context for choosing a song line
-    pub type Line<T> = StorageValue<_, u32, ValueQuery>;
-
     #[pallet::call]
     impl<T: Config> Pallet<T> {
         #[pallet::weight((T::DbWeight::get().reads_writes(1, 1) + 10_000, DispatchClass::Mandatory))]
         pub fn update_karaoke_inherent(origin: OriginFor<T>, song_line : InherentType) -> DispatchResult {
             // Check unsigned
             ensure_none(origin)?;
-
-            // update line counter
-            let mut ind = Line::<T>::get();
-            ind = (ind + 1) % SONG_LEN;
-            Line::<T>::put(ind);
 
             // emit an event
             Self::deposit_event(Event::SongLineSet(song_line));
@@ -139,10 +129,11 @@ pub mod pallet {
                 .expect("Song not correctly encoded")
                 .expect("Song data must be provided");
 
-            // get value of line counter from storage
-            let line_num = Line::<T>::get() as usize;
+            // get block_number modulo SONG_LEN
+            let line_num : usize = (<frame_system::Pallet<T>>::block_number() % SONG_LEN.into()).try_into().ok()?;
 
             // create inherent
+            info!("Creating song line inherent: {}", alloc::str::from_utf8(&data[line_num]).unwrap());
             Some(Call::update_karaoke_inherent { song_line : data[line_num].clone() })
         }
 

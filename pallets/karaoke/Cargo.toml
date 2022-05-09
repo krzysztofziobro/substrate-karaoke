@@ -19,6 +19,7 @@ frame-system = { version = "4.0.0-dev", default-features = false, git = "https:/
 frame-try-runtime = { version = "0.10.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.18" }
 sp-inherents = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.18"}
 sp-runtime = { default-features = false, version = "6.0.0", git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.18" }
+sp-std = { default-features = false, version = "4.0.0", git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.18" }
 thiserror = {version = "1.0.30", optional = true}
 async-trait = {version = "0.1.50", optional = true}
 log = { version = "0.4.8", optional = true}
@@ -32,6 +33,7 @@ std = [
 	"frame-system/std",
 	"sp-inherents/std",
     "sp-runtime/std",
+    "sp-std/std",
     "async-trait",
     "thiserror",
     "log",
