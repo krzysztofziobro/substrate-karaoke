@@ -106,7 +106,7 @@ pub mod pallet {
 
     #[pallet::call]
     impl<T: Config> Pallet<T> {
-        #[pallet::weight((T::DbWeight::get().reads_writes(1, 1) + 10_000, DispatchClass::Mandatory))]
+        #[pallet::weight((10_000, DispatchClass::Mandatory))]
         pub fn update_karaoke_inherent(origin: OriginFor<T>, song_line : InherentType) -> DispatchResult {
             // Check unsigned
             ensure_none(origin)?;
